@@ -1,0 +1,9 @@
+<div *ngIf="subjects.length > 0">
+  <h2>Thèmes disponibles</h2>
+  <ul>
+    <li *ngFor="let subject of subjects">{{ subject.name }}</li>
+  </ul>
+</div>
+<div *ngIf="subjects.length === 0">
+  <p>Aucun thème disponible.</p>
+</div>
