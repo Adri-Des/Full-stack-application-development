@@ -12,13 +12,21 @@ export class RegisterComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   register() {
+    if (!this.user.username || !this.user.email || !this.user.password) {
+      alert('Tous les champs doivent être remplis.');
+      return;
+    }
     this.authService.register(this.user).subscribe(
       (response: any) => {
         alert(response.message);
         this.router.navigate(['/login']);
       },
       (error) => {
-        alert('Erreur lors de l’inscription');
+        if (error.error?.error) {
+          alert(`Erreur : ${error.error.error}`);
+        } else {
+          alert('Erreur lors de l’inscription');
+        }
       }
     );
   }
