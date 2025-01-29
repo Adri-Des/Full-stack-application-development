@@ -1,0 +1,20 @@
+<h1>Créer un article</h1>
+<form (ngSubmit)="createArticle()">
+  <label>
+    Titre :
+    <input type="text" [(ngModel)]="article.title" name="title" required />
+  </label>
+  <label>
+    Contenu :
+    <textarea [(ngModel)]="article.content" name="content" required></textarea>
+  </label>
+  <label>
+    Sujet :
+    <select [(ngModel)]="article.subjectId" name="subjectId" required>
+      <option *ngFor="let subject of subjects" [value]="subject.id">
+        {{ subject.name }}
+      </option>
+    </select>
+  </label>
+  <button type="submit">Publier</button>
+</form>

@@ -16,4 +16,18 @@ export class SubjectsComponent implements OnInit {
       this.subjects = data;
     });
   }
+
+  subscribe(subjectId: number) {
+    this.subjectService.subscribeToSubject(subjectId).subscribe(
+      () => alert('Abonnement réussi'),
+      () => alert('Erreur lors de l’abonnement')
+    );
+  }
+
+  unsubscribe(subjectId: number) {
+    this.subjectService.unsubscribeFromSubject(subjectId).subscribe(
+      () => alert('Désabonnement réussi'),
+      () => alert('Erreur lors du désabonnement')
+    );
+  }
 }

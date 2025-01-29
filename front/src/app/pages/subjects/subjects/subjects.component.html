@@ -1,8 +1,13 @@
 <div *ngIf="subjects.length > 0">
   <h2>Thèmes disponibles</h2>
   <ul>
-    <li *ngFor="let subject of subjects">{{ subject.name }}</li>
+    <li *ngFor="let subject of subjects">
+      {{ subject.name }}
+      <button (click)="subscribe(subject.id)">S'abonner</button>
+      <button (click)="unsubscribe(subject.id)">Se désabonner</button>
+    </li>
   </ul>
+  <a routerLink="/add-article">Créer un article</a>
 </div>
 <div *ngIf="subjects.length === 0">
   <p>Aucun thème disponible.</p>

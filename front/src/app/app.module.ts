@@ -11,6 +11,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { RegisterComponent } from './pages/register/register.component';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './pages/login/login.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { FeedComponent } from './pages/feed/feed.component';
+import { AddArticleComponent } from './pages/add-article/add-article.component';
+import { ArticleDetailComponent } from './pages/detail-article/detail-article.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +23,10 @@ import { LoginComponent } from './pages/login/login.component';
     SubjectsComponent,
     RegisterComponent,
     LoginComponent,
+    ProfileComponent,
+    FeedComponent,
+    AddArticleComponent,
+    ArticleDetailComponent,
   ],
   imports: [
     BrowserModule,

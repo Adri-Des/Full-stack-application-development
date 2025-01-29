@@ -1,0 +1,14 @@
+<div *ngIf="articles.length > 0">
+  <h1>Fil d’actualité</h1>
+  <div *ngFor="let article of articles">
+    <h2>{{ article.title }}</h2>
+    <p>Par {{ article.author.username }} - {{ article.subject.name }}</p>
+    <p>{{ article.content }}</p>
+    <small>Publié le {{ article.createdAt | date }}</small>
+    <a [routerLink]="'/article/' + article.id">Lire la suite</a>
+    <hr />
+  </div>
+</div>
+<div *ngIf="articles.length === 0">
+  <p>Aucun article disponible.</p>
+</div>
