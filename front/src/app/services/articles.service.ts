@@ -41,4 +41,22 @@ export class ArticleService {
     const headers = { Authorization: `Bearer ${token}` };
     return this.http.get<Article>(`${this.addArticleUrl}/${id}`, { headers });
   }
+
+  addComment(articleId: number, content: string): Observable<any> {
+    const token = localStorage.getItem('jwt');
+    const headers = { Authorization: `Bearer ${token}` };
+    return this.http.post<any>(
+      `${this.addArticleUrl}/${articleId}/comment`,
+      content,
+      { headers }
+    );
+  }
+
+  getComments(articleId: number): Observable<any[]> {
+    const token = localStorage.getItem('jwt');
+    const headers = { Authorization: `Bearer ${token}` };
+    return this.http.get<any[]>(`${this.addArticleUrl}/${articleId}/comment`, {
+      headers,
+    });
+  }
 }

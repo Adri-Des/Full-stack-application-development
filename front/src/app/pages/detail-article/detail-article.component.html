@@ -1,0 +1,31 @@
+<div *ngIf="article">
+  <h1>{{ article?.title }}</h1>
+  <p><strong>Auteur :</strong> {{ article?.author?.username }}</p>
+  <p><strong>Sujet :</strong> {{ article?.subject?.name }}</p>
+  <p><strong>Date :</strong> {{ article?.createdAt }}</p>
+  <p>{{ article?.content }}</p>
+
+  <div>
+    <h2>Commentaires</h2>
+    <ul>
+      <li *ngFor="let comment of comments">
+        <p>
+          <strong>{{ comment.author.username }}</strong> : {{ comment.content }}
+        </p>
+        <small>{{ comment.createdAt | date }}</small>
+      </li>
+    </ul>
+    <form (ngSubmit)="addComment()">
+      <textarea
+        [(ngModel)]="newComment"
+        name="comment"
+        placeholder="Écrire un commentaire..."
+        required
+      ></textarea>
+      <button type="submit">Publier</button>
+    </form>
+  </div>
+</div>
+<div *ngIf="!article">
+  <p>Chargement de l'article...</p>
+</div>

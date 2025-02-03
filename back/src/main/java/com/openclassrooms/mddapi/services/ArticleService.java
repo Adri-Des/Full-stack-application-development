@@ -1,6 +1,7 @@
 package com.openclassrooms.mddapi.services;
 
 import com.openclassrooms.mddapi.models.Article;
+
 import com.openclassrooms.mddapi.models.Subject;
 import com.openclassrooms.mddapi.models.User;
 import com.openclassrooms.mddapi.repository.ArticleRepository;
@@ -10,7 +11,6 @@ import com.openclassrooms.mddapi.repository.UserRepository;
 
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -52,7 +52,6 @@ public class ArticleService {
         article.setContent(content);
         article.setSubject(subject);
         article.setAuthor(user);
-        //article.setCreatedAt(LocalDateTime.now());
         return articleRepository.save(article);
     }
     
