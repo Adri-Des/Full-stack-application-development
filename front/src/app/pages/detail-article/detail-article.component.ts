@@ -5,8 +5,9 @@ import { ArticleService, Article } from '../../services/articles.service';
 @Component({
   selector: 'app-article-detail',
   templateUrl: './detail-article.component.html',
+  styleUrls: ['./detail-article.component.scss'],
 })
-export class ArticleDetailComponent implements OnInit {
+export class DetailArticleComponent implements OnInit {
   article: Article | undefined;
   comments: any[] = [];
   newComment: string = '';
@@ -30,7 +31,11 @@ export class ArticleDetailComponent implements OnInit {
   loadComments() {
     if (this.article) {
       this.articleService.getComments(this.article.id).subscribe(
-        (data) => (this.comments = data),
+        (
+          data //{
+        ) => (this.comments = data),
+        //console.log('Commentaires récupérés:', this.comments);
+        //},
         () => alert('Erreur lors de la récupération des commentaires')
       );
     }

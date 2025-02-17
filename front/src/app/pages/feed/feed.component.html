@@ -1,4 +1,4 @@
-<div *ngIf="articles.length > 0">
+<!--<div *ngIf="articles.length > 0">
   <h1>Fil d’actualité</h1>
   <div *ngFor="let article of articles">
     <h2>{{ article.title }}</h2>
@@ -11,4 +11,59 @@
 </div>
 <div *ngIf="articles.length === 0">
   <p>Aucun article disponible.</p>
+</div>-->
+
+<!--<mat-toolbar class="toolbar-container">
+  <img src="assets/logo_p6.png" class="logo" alt="MDD Logo" />
+
+  <span class="spacer"></span>
+  <div class="nav-links">
+    <a mat-button routerLink="/feed" routerLinkActive="active-link">Articles</a>
+    <a mat-button routerLink="/subjects" routerLinkActive="active-link"
+      >Thèmes</a
+    >
+
+    <button mat-icon-button>
+      <mat-icon>account_circle</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>-->
+
+<div class="feed-header">
+  <button mat-raised-button color="primary" routerLink="/add-article">
+    Créer un article
+  </button>
+  <div class="sort-container">
+    <button mat-button [matMenuTriggerFor]="sortMenu">
+      Trier par
+      <mat-icon>{{
+        sortOrder === "desc" ? "arrow_downward" : "arrow_upward"
+      }}</mat-icon>
+    </button>
+  </div>
+</div>
+
+<mat-menu #sortMenu="matMenu">
+  <button mat-menu-item (click)="changeSortOrder('desc')">
+    Plus récent <mat-icon>arrow_downward</mat-icon>
+  </button>
+  <button mat-menu-item (click)="changeSortOrder('asc')">
+    Plus ancien <mat-icon>arrow_upward</mat-icon>
+  </button>
+</mat-menu>
+
+<div class="content grid">
+  <mat-card
+    *ngFor="let article of articles"
+    (click)="ArticleDetail(article.id)"
+  >
+    <mat-card-title>{{ article.title }}</mat-card-title>
+    <mat-card-subtitle
+      >{{ article.createdAt | date : "dd/MM/yyyy à HH:mm" }} -
+      {{ article.author.username }}</mat-card-subtitle
+    >
+    <mat-card-content>
+      {{ article.content }}
+    </mat-card-content>
+  </mat-card>
 </div>

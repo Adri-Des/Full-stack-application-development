@@ -1,4 +1,4 @@
-<div *ngIf="article">
+<!--<div *ngIf="article">
   <h1>{{ article?.title }}</h1>
   <p><strong>Auteur :</strong> {{ article?.author?.username }}</p>
   <p><strong>Sujet :</strong> {{ article?.subject?.name }}</p>
@@ -28,4 +28,46 @@
 </div>
 <div *ngIf="!article">
   <p>Chargement de l'article...</p>
+</div>-->
+
+<button mat-icon-button routerLink="/feed">
+  <mat-icon>arrow_back</mat-icon>
+</button>
+
+<div class="article-container" *ngIf="article">
+  <div class="article-content">
+    <h2>{{ article.title }}</h2>
+    <p>
+      <strong>Date:</strong>
+      {{ article.createdAt | date : "dd/MM/yyyy à HH:mm" }} |
+      <strong>Auteur:</strong> {{ article.author.username }} |
+      <strong>Thème:</strong>
+      {{ article.subject.name }}
+    </p>
+    <p>{{ article.content }}</p>
+  </div>
+
+  <hr />
+  <mat-divider></mat-divider>
+
+  <div class="comments-container">
+    <h3>Commentaires</h3>
+    <div *ngFor="let comment of comments" class="list-comments">
+      {{ comment.author.username }}
+      <p class="comment">{{ comment.content }}</p>
+    </div>
+
+    <div class="comment-input">
+      <mat-form-field>
+        <textarea
+          matInput
+          placeholder="Écrivez ici votre commentaire"
+          [(ngModel)]="newComment"
+        ></textarea>
+      </mat-form-field>
+      <button mat-icon-button class="send-comment" (click)="addComment()">
+        <mat-icon>send</mat-icon>
+      </button>
+    </div>
+  </div>
 </div>

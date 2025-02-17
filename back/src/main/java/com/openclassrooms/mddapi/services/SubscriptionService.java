@@ -17,8 +17,8 @@ public class SubscriptionService {
         this.subscriptionRepository = subscriptionRepository;
     }
 
-    public Optional<Subscription> getUserSubscriptions(Long userId, Long subjectId) {
-        return subscriptionRepository.findByUserIdAndSubjectId(userId, subjectId);
+    public List<Subscription> getUserSubscriptions(Long userId) {
+        return subscriptionRepository.findByUserId(userId);
     }
 
     public Subscription addSubscription(Long userId, Long subjectId) {

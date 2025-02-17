@@ -24,6 +24,9 @@ public class UserService {
         if (userRepository.existsByEmail(user.getEmail())) {
             throw new RuntimeException("Email already in use");
         }
+        if (userRepository.existsByUsername(user.getUsername())) {
+            throw new RuntimeException("Username already in use");
+        }
         
         if (!isPasswordValid(user.getPassword())) {
             throw new RuntimeException("Invalid password : The password must be at least 8 characters long with at least 1 number, 1 lowercase letter, 1 uppercase letter, 1 special character ");
@@ -56,5 +59,28 @@ public class UserService {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));
         return user.getId();
+    }
+    
+    public User updateUser(Long userId, User updatedUser) {
+    	User user = userRepository.findById(userId)
+    			 .orElseThrow(() -> new RuntimeException("User not found"));
+    	
+    	
+         
+        	if (updatedUser.getEmail() != null && !updatedUser.getEmail().equals(user.getEmail()) && userRepository.existsByEmail(updatedUser.getEmail())) {
+        	        throw new RuntimeException("Email already in use");
+        	   }
+        	if (updatedUser.getUsername() != null && !updatedUser.getUsername().equals(user.getUsername()) && userRepository.existsByUsername(updatedUser.getUsername())) {
+                throw new RuntimeException("Username already in use");
+            }
+
+        	if (updatedUser.getUsername() != null && !updatedUser.getUsername().equals(user.getUsername())) {
+        		user.setUsername(updatedUser.getUsername());
+        	}
+        	if (updatedUser.getEmail() != null && !updatedUser.getEmail().equals(user.getEmail())) {
+        		user.setEmail(updatedUser.getEmail());
+        	}
+            return userRepository.save(user);
+
     }
 }

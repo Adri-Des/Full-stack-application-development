@@ -1,0 +1,36 @@
+.content {
+  padding: 16px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+mat-card {
+  padding: 16px;
+}
+
+.subscribe-button {
+  background: #7d57c1;
+  color: white;
+  //padding: 1px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.subscribe-container {
+  display: flex;
+  justify-content: center;
+}
+.subscribed-text {
+  color: #7d57c1;
+  margin-top: 10px;
+}
+/*button.mat-icon-button {
+  width: 48px;
+  height: 48px;
+}*/
+
+/*mat-icon {
+  font-size: 36px;
+}*/

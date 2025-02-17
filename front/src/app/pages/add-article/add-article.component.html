@@ -1,4 +1,4 @@
-<h1>Créer un article</h1>
+<!--<h1>Créer un article</h1>
 <form (ngSubmit)="createArticle()">
   <label>
     Titre :
@@ -17,4 +17,54 @@
     </select>
   </label>
   <button type="submit">Publier</button>
-</form>
+</form>-->
+
+<!--<mat-toolbar class="toolbar-container">
+  <img src="assets/logo_p6.png" class="logo" alt="MDD Logo" />
+
+  <span class="spacer"></span>
+  <div class="nav-links">
+    <a mat-button routerLink="/feed" routerLinkActive="active-link">Articles</a>
+    <a mat-button routerLink="/subjects" routerLinkActive="active-link"
+      >Thèmes</a
+    >
+
+    <button mat-icon-button>
+      <mat-icon>account_circle</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>-->
+
+<button mat-icon-button routerLink="/feed">
+  <mat-icon>arrow_back</mat-icon>
+</button>
+<div class="container">
+  <span><strong>Créer un nouvel article</strong></span>
+
+  <form (ngSubmit)="createArticle()">
+    <mat-form-field appearance="outline">
+      <mat-label>Sélectionner un thème</mat-label>
+      <mat-select [(ngModel)]="article.subjectId" name="subjectId">
+        <mat-option *ngFor="let subject of subjects" [value]="subject.id">{{
+          subject.name
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Titre de l’article</mat-label>
+      <input matInput [(ngModel)]="article.title" name="title" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Contenu de l’article</mat-label>
+      <textarea
+        matInput
+        [(ngModel)]="article.content"
+        name="content"
+      ></textarea>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">Créer</button>
+  </form>
+</div>

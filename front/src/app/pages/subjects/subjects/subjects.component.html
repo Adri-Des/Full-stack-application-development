@@ -1,4 +1,4 @@
-<div *ngIf="subjects.length > 0">
+<!--<div *ngIf="subjects.length > 0">
   <h2>Thèmes disponibles</h2>
   <ul>
     <li *ngFor="let subject of subjects">
@@ -11,4 +11,49 @@
 </div>
 <div *ngIf="subjects.length === 0">
   <p>Aucun thème disponible.</p>
+</div>-->
+
+<!--<mat-toolbar class="toolbar-container">
+  <img src="assets/logo_p6.png" class="logo" alt="MDD Logo" />
+
+  <span class="spacer"></span>
+  <div class="nav-links">
+    <a mat-button routerLink="/feed" routerLinkActive="active-link">Articles</a>
+    <a mat-button routerLink="/subjects" routerLinkActive="active-link"
+      >Thèmes</a
+    >
+
+    <button mat-icon-button>
+      <mat-icon>account_circle</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>-->
+
+<div class="content grid">
+  <mat-card *ngFor="let subject of subjects">
+    <mat-card-title>{{ subject.name }}</mat-card-title>
+
+    <!--<mat-card-content>
+      {{ subject.content }}
+    </mat-card-content>-->
+
+    <div class="subscribe-container">
+      <div
+        class="subscribed-text"
+        *ngIf="isSubscribed(subject.id); else subscribeButton"
+      >
+        <span>✅ Abonné</span>
+      </div>
+
+      <ng-template #subscribeButton>
+        <button
+          mat-raised-button
+          class="subscribe-button"
+          (click)="subscribe(subject.id)"
+        >
+          S’abonner
+        </button>
+      </ng-template>
+    </div>
+  </mat-card>
 </div>

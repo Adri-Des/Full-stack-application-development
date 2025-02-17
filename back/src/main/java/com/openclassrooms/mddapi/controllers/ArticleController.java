@@ -59,11 +59,12 @@ public class ArticleController {
 	@PostMapping("/{id}/comment")
 	public ResponseEntity<Comment> addComment(
 	        @PathVariable Long id,
-	        @RequestBody String content,
+	        @RequestBody  String content,
 	        @RequestHeader("Authorization") String token) {
 		String email = JwtUtils.extractEmail(token.replace("Bearer ", ""));
         Long userId = userService.findUserIdByEmail(email);
 	    Comment comment = commentService.addComment(userId, id, content);
+	    System.out.println(content);
 	    return ResponseEntity.ok(comment);
 	}
 

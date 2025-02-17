@@ -1,6 +1,63 @@
-<h1>Mon Profil</h1>
+<!--<h1>Mon Profil</h1>
 <div *ngIf="user">
   <p><strong>Nom d'utilisateur :</strong> {{ user.username }}</p>
   <p><strong>Email :</strong> {{ user.email }}</p>
   <button (click)="logout()">Se déconnecter</button>
+</div>-->
+
+<!--<mat-toolbar class="toolbar-container">
+  <img src="assets/logo_p6.png" class="logo" alt="MDD Logo" />
+
+  <span class="spacer"></span>
+  <div class="nav-links">
+    <a mat-button routerLink="/feed" routerLinkActive="active-link">Articles</a>
+    <a mat-button routerLink="/subjects" routerLinkActive="active-link"
+      >Thèmes</a
+    >
+
+    <button mat-icon-button>
+      <mat-icon>account_circle</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>-->
+
+<div class="profile-container">
+  <div class="profile-info">
+    <h2><strong>Profil utilisateur</strong></h2>
+    <mat-form-field>
+      <input matInput placeholder="Username" [(ngModel)]="user.username" />
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        type="email"
+        placeholder="Email"
+        [(ngModel)]="user.email"
+      />
+    </mat-form-field>
+    <button mat-button class="save-button" (click)="updateProfile()">
+      Sauvegarder
+    </button>
+    <button mat-button class="logout-button" (click)="logout()">
+      Se déconnecter
+    </button>
+  </div>
+</div>
+<hr />
+<div class="subscriptions-container">
+  <h2><strong>Abonnements</strong></h2>
+  <div class="content grid">
+    <mat-card *ngFor="let subscription of subscriptions">
+      <mat-card-title>{{ subscription.subject.name }}</mat-card-title>
+      <div class="button-container">
+        <button
+          mat-button
+          class="unsubscribe-button"
+          (click)="unsubscribe(subscription.subject.id)"
+        >
+          Se désabonner
+        </button>
+      </div>
+    </mat-card>
+  </div>
 </div>

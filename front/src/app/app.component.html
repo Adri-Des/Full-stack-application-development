@@ -1,1 +1,66 @@
+<mat-toolbar *ngIf="showHeader" class="toolbar-container">
+  <img src="assets/logo_p6.png" class="logo" alt="MDD Logo" />
+
+  <span class="spacer"></span>
+
+  <button mat-icon-button (click)="toggleSidenav()" class="menu-button">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <div class="nav-links" *ngIf="!isMobile">
+    <a mat-button routerLink="/feed" routerLinkActive="active-link">Articles</a>
+    <a mat-button routerLink="/subjects" routerLinkActive="active-link"
+      >Thèmes</a
+    >
+
+    <button
+      mat-icon-button
+      routerLink="/profile"
+      routerLinkActive="active-link"
+    >
+      <mat-icon>account_circle</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>
+
+<!-- Menu latéral pour mobile -->
+<mat-sidenav-container *ngIf="showHeader" class="sidenav-container">
+  <mat-sidenav
+    #sidenav
+    mode="over"
+    position="end"
+    class="sidenav"
+    (backdropClick)="closeSidenav()"
+  >
+    <div class="menu-content">
+      <div class="menu-top">
+        <a
+          mat-list-item
+          routerLink="/feed"
+          routerLinkActive="active-link"
+          (click)="closeSidenav()"
+          >Articles</a
+        >
+        <a
+          mat-list-item
+          routerLink="/subjects"
+          routerLinkActive="active-link"
+          (click)="closeSidenav()"
+          >Thèmes</a
+        >
+      </div>
+      <div class="menu-bottom">
+        <a
+          mat-list-item
+          routerLink="/profile"
+          routerLinkActive="active-link"
+          (click)="closeSidenav()"
+        >
+          <mat-icon>account_circle</mat-icon>
+        </a>
+      </div>
+    </div>
+  </mat-sidenav>
+</mat-sidenav-container>
+
 <router-outlet></router-outlet>

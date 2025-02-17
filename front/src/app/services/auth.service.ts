@@ -23,4 +23,11 @@ export class AuthService {
     const headers = { Authorization: `Bearer ${token}` };
     return this.http.get<any>(`${this.apiUrl}/me`, { headers });
   }
+
+  updateProfile(userData: any): Observable<any> {
+    const token = localStorage.getItem('jwt');
+    const headers = { Authorization: `Bearer ${token}` };
+
+    return this.http.put(`${this.apiUrl}/update`, userData, { headers });
+  }
 }

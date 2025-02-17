@@ -7,12 +7,17 @@ export interface Subject {
   name: string;
 }
 
+/*export interface Subscription {
+  id: number;
+  subject: Subject;
+}*/
+
 @Injectable({
   providedIn: 'root',
 })
 export class SubjectService {
   private apiUrl = 'api/subjects';
-  private apiSubscibeUrl = 'api/subscriptions';
+  private apiSubscribeUrl = 'api/subscriptions';
 
   constructor(private http: HttpClient) {}
 
@@ -24,7 +29,7 @@ export class SubjectService {
     const token = localStorage.getItem('jwt');
     const headers = { Authorization: `Bearer ${token}` };
     return this.http.post<string>(
-      `${this.apiSubscibeUrl}?subjectId=${subjectId}`,
+      `${this.apiSubscribeUrl}?subjectId=${subjectId}`,
       {},
       { headers }
     );
@@ -34,8 +39,14 @@ export class SubjectService {
     const token = localStorage.getItem('jwt');
     const headers = { Authorization: `Bearer ${token}` };
     return this.http.delete<string>(
-      `${this.apiSubscibeUrl}?subjectId=${subjectId}`,
+      `${this.apiSubscribeUrl}?subjectId=${subjectId}`,
       { headers }
     );
+  }
+
+  getUserSubscriptions(): Observable<any[]> {
+    const token = localStorage.getItem('jwt');
+    const headers = { Authorization: `Bearer ${token}` };
+    return this.http.get<any[]>(this.apiSubscribeUrl, { headers });
   }
 }

@@ -1,10 +1,12 @@
 package com.openclassrooms.mddapi.controllers;
 
+import com.openclassrooms.mddapi.models.Subscription;
 import com.openclassrooms.mddapi.security.jwt.JwtUtils;
 import com.openclassrooms.mddapi.services.SubscriptionService;
 import com.openclassrooms.mddapi.services.UserService;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.http.HttpStatus;
@@ -62,6 +64,14 @@ public class SubscriptionController {
         Map<String, String> response = new HashMap<>();
         response.put("message", "Unsubscribed successfully");
         return ResponseEntity.ok(response);
+    }
+    
+    @GetMapping
+    public List<Subscription> getUserSubscriptions(@RequestHeader("Authorization") String token){
+    	String email = JwtUtils.extractEmail(token.replace("Bearer ", ""));
+        Long userId = userService.findUserIdByEmail(email);
+        return subscriptionService.getUserSubscriptions(userId);
+        
     }
 
 

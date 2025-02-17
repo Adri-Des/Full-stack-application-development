@@ -7,6 +7,7 @@ import com.openclassrooms.mddapi.services.UserService;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -49,4 +50,25 @@ public class AuthController {
                 .orElseThrow(() -> new RuntimeException("User not found"));
         return ResponseEntity.ok(user);
     }
+    
+    
+    @PutMapping("/update")
+    public ResponseEntity<?> updateUserProfile(@RequestHeader("Authorization") String token, @RequestBody User updatedUser) {
+        try {
+            String email = JwtUtils.extractEmail(token.replace("Bearer ", ""));
+            /*User user = userService.findUserByEmail(email)
+            		.orElseThrow(() -> new RuntimeException("User not found"));;*/
+            Long userId = userService.findUserIdByEmail(email);
+            
+            
+           /* user.setUsername(updatedUser.getUsername());
+            user.setEmail(updatedUser.getEmail());*/
+
+           User user = userService.updateUser(userId,updatedUser);
+            return ResponseEntity.ok(user);
+        } catch (RuntimeException e) {
+        	return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
 }

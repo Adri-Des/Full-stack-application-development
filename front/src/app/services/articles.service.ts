@@ -11,6 +11,12 @@ export interface Article {
   createdAt: string;
 }
 
+/*export interface Comment{
+  id:number;
+  content: string;
+  author: { username: string };
+}*/
+
 @Injectable({
   providedIn: 'root',
 })

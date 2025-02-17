@@ -8,7 +8,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { FeedComponent } from './pages/feed/feed.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AddArticleComponent } from './pages/add-article/add-article.component';
-import { ArticleDetailComponent } from './pages/detail-article/detail-article.component';
+import { DetailArticleComponent } from './pages/detail-article/detail-article.component';
 
 // consider a guard combined with canLoad / canActivate route option
 // to manage unauthenticated user to access private routes
@@ -26,7 +26,7 @@ const routes: Routes = [
   },
   {
     path: 'article/:id',
-    component: ArticleDetailComponent,
+    component: DetailArticleComponent,
     canActivate: [AuthGuard],
   },
 ];
