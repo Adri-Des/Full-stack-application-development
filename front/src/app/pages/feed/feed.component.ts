@@ -20,8 +20,9 @@ export class FeedComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
+      // Check if a 'refresh' query parameter is present
       if (params['refresh']) {
-        this.retrieveArticles();
+        this.retrieveArticles(); // Refresh the articles if requested
       }
     });
 
@@ -29,9 +30,10 @@ export class FeedComponent implements OnInit {
   }
 
   retrieveArticles() {
+    // Fetches the list of articles from the service
     this.articleService.getFeed().subscribe(
       (data) => {
-        this.articles = data;
+        this.articles = data; // Store the received articles
       },
       () => {
         alert('Erreur lors de la récupération du fil d’actualité');
@@ -39,12 +41,14 @@ export class FeedComponent implements OnInit {
     );
   }
 
+  // Updates the sort order and applies sorting
   changeSortOrder(order: 'asc' | 'desc') {
     this.sortOrder = order;
     this.sortArticles();
   }
 
   sortArticles() {
+    // Sorts articles by their creation date according to the selected order
     this.articles.sort((a, b) => {
       const dateA = new Date(a.createdAt).getTime();
       const dateB = new Date(b.createdAt).getTime();
@@ -53,6 +57,7 @@ export class FeedComponent implements OnInit {
   }
 
   ArticleDetail(articleId: number) {
+    // Navigates to the detail page of a specific article
     this.router.navigate(['/article', articleId]);
   }
 }

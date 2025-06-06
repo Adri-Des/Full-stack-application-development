@@ -21,10 +21,12 @@ export class SubjectService {
 
   constructor(private http: HttpClient) {}
 
+  // Retrieve all available subjects
   getSubjects(): Observable<Subject[]> {
     return this.http.get<Subject[]>(this.apiUrl);
   }
 
+  // Subscribe the current user to a subject by its ID
   subscribeToSubject(subjectId: number): Observable<string> {
     const token = localStorage.getItem('jwt');
     const headers = { Authorization: `Bearer ${token}` };
@@ -35,6 +37,7 @@ export class SubjectService {
     );
   }
 
+  // Unsubscribe the current user from a subject by its ID
   unsubscribeFromSubject(subjectId: number): Observable<string> {
     const token = localStorage.getItem('jwt');
     const headers = { Authorization: `Bearer ${token}` };
@@ -44,6 +47,7 @@ export class SubjectService {
     );
   }
 
+  // Get the list of subjects the user is currently subscribed to
   getUserSubscriptions(): Observable<any[]> {
     const token = localStorage.getItem('jwt');
     const headers = { Authorization: `Bearer ${token}` };

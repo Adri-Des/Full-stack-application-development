@@ -14,6 +14,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Service responsible for managing articles and providing feed content for users.
+ */
 @Service
 public class ArticleService {
     private final ArticleRepository articleRepository;
@@ -21,6 +24,14 @@ public class ArticleService {
     private final SubjectRepository subjectRepository;
     private final UserRepository userRepository;
 
+    /**
+     * Constructs an ArticleService with the required repositories.
+     *
+     * @param articleRepository       repository for managing articles
+     * @param subscriptionRepository  repository for managing user subscriptions
+     * @param subjectRepository       repository for retrieving subjects
+     * @param userRepository          repository for retrieving users
+     */
     public ArticleService(ArticleRepository articleRepository, SubscriptionRepository subscriptionRepository, SubjectRepository subjectRepository, UserRepository userRepository) {
         this.articleRepository = articleRepository;
         this.subscriptionRepository = subscriptionRepository;
@@ -28,6 +39,12 @@ public class ArticleService {
         this.userRepository = userRepository;
     }
 
+    /**
+     * Retrieves a personalized article feed for the given user based on their subscriptions.
+     *
+     * @param userId the ID of the user whose feed should be retrieved
+     * @return a list of articles related to the user's subscribed subjects, ordered by creation date (most recent first)
+     */
     public List<Article> getFeed(Long userId) {
         List<Long> subjectIds = subscriptionRepository.findByUserId(userId)
                 .stream()
@@ -36,17 +53,26 @@ public class ArticleService {
         return articleRepository.findBySubjectIdInOrderByCreatedAtDesc(subjectIds);
     }
     
-    
+    /**
+     * Creates and saves a new article.
+     *
+     * @param userId    the ID of the user creating the article
+     * @param subjectId the ID of the subject the article belongs to
+     * @param title     the title of the article
+     * @param content   the content of the article
+     * @return the saved Article instance
+     * @throws RuntimeException if the subject or user does not exist
+     */
     public Article createArticle(Long userId, Long subjectId, String title, String content) {
-        // Vérifiez si le sujet existe
+        // Check if subject exist
         Subject subject = subjectRepository.findById(subjectId)
                 .orElseThrow(() -> new RuntimeException("Subject not found"));
 
-        // Vérifiez si l'utilisateur existe
+        // Check if user exist
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        // Créez l'article
+        // Create article
         Article article = new Article();
         article.setTitle(title);
         article.setContent(content);
@@ -55,6 +81,13 @@ public class ArticleService {
         return articleRepository.save(article);
     }
     
+    /**
+     * Retrieves an article by its ID.
+     *
+     * @param id the ID of the article
+     * @return the Article instance if found
+     * @throws RuntimeException if the article does not exist
+     */
     public Article getArticleById(Long id) {
         return articleRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Article not found"));

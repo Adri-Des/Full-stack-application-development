@@ -1,30 +1,3 @@
-/*import { Component } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
-
-@Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-})
-export class LoginComponent {
-  user = { email: '', password: '' };
-
-  constructor(private authService: AuthService, private router: Router) {}
-
-  login() {
-    this.authService.login(this.user).subscribe(
-      (response: any) => {
-        localStorage.setItem('jwt', response.token);
-        //alert('Connexion réussie');
-        this.router.navigate(['subjects']);
-      },
-      (error) => {
-        alert('Identifiants incorrects');
-      }
-    );
-  }
-}*/
-
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
@@ -44,6 +17,7 @@ export class LoginComponent {
     private authService: AuthService,
     private router: Router
   ) {
+    // Initialize the login form with validators
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
@@ -52,8 +26,10 @@ export class LoginComponent {
 
   login() {
     if (this.loginForm.valid) {
+      // Proceed only if the form is valid
       this.authService.login(this.loginForm.value).subscribe({
         next: (response: any) => {
+          // Save the JWT token to local storage
           localStorage.setItem('jwt', response.token);
           this.router.navigate(['subjects']);
         },

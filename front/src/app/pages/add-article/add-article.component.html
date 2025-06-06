@@ -1,47 +1,13 @@
-<!--<h1>Créer un article</h1>
-<form (ngSubmit)="createArticle()">
-  <label>
-    Titre :
-    <input type="text" [(ngModel)]="article.title" name="title" required />
-  </label>
-  <label>
-    Contenu :
-    <textarea [(ngModel)]="article.content" name="content" required></textarea>
-  </label>
-  <label>
-    Sujet :
-    <select [(ngModel)]="article.subjectId" name="subjectId" required>
-      <option *ngFor="let subject of subjects" [value]="subject.id">
-        {{ subject.name }}
-      </option>
-    </select>
-  </label>
-  <button type="submit">Publier</button>
-</form>-->
-
-<!--<mat-toolbar class="toolbar-container">
-  <img src="assets/logo_p6.png" class="logo" alt="MDD Logo" />
-
-  <span class="spacer"></span>
-  <div class="nav-links">
-    <a mat-button routerLink="/feed" routerLinkActive="active-link">Articles</a>
-    <a mat-button routerLink="/subjects" routerLinkActive="active-link"
-      >Thèmes</a
-    >
-
-    <button mat-icon-button>
-      <mat-icon>account_circle</mat-icon>
-    </button>
-  </div>
-</mat-toolbar>-->
-
+<!-- Arrow button that navigates to the 'feed' page -->
 <button mat-icon-button routerLink="/feed">
   <mat-icon>arrow_back</mat-icon>
 </button>
 <div class="container">
   <span><strong>Créer un nouvel article</strong></span>
 
+  <!-- Form for creating a subject -->
   <form (ngSubmit)="createArticle()">
+    <!-- Select for choosing a subject -->
     <mat-form-field appearance="outline">
       <mat-label>Sélectionner un thème</mat-label>
       <mat-select [(ngModel)]="article.subjectId" name="subjectId">
@@ -51,11 +17,13 @@
       </mat-select>
     </mat-form-field>
 
+    <!-- Input field for the article title -->
     <mat-form-field appearance="outline">
       <mat-label>Titre de l’article</mat-label>
       <input matInput [(ngModel)]="article.title" name="title" />
     </mat-form-field>
 
+    <!-- Textarea for the article content -->
     <mat-form-field appearance="outline">
       <mat-label>Contenu de l’article</mat-label>
       <textarea

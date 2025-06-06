@@ -26,12 +26,14 @@ export class ArticleService {
 
   constructor(private http: HttpClient) {}
 
+  // Fetch all articles
   getFeed(): Observable<Article[]> {
-    const token = localStorage.getItem('jwt');
-    const headers = { Authorization: `Bearer ${token}` };
-    return this.http.get<Article[]>(this.apiUrl, { headers });
+    const token = localStorage.getItem('jwt'); // Get JWT token from local storage
+    const headers = { Authorization: `Bearer ${token}` }; // Include token in Authorization header
+    return this.http.get<Article[]>(this.apiUrl, { headers }); // Send GET request with auth headers
   }
 
+  // Create a new article
   createArticle(article: {
     title: string;
     content: string;
@@ -39,28 +41,32 @@ export class ArticleService {
   }): Observable<any> {
     const token = localStorage.getItem('jwt');
     const headers = { Authorization: `Bearer ${token}` };
-    return this.http.post<any>(this.addArticleUrl, article, { headers });
+    return this.http.post<any>(this.addArticleUrl, article, { headers }); // POST request with auth headers and article element to create article
   }
 
+  // Fetch a specific article by its ID
   getArticleById(id: number): Observable<Article> {
     const token = localStorage.getItem('jwt');
     const headers = { Authorization: `Bearer ${token}` };
-    return this.http.get<Article>(`${this.addArticleUrl}/${id}`, { headers });
+    return this.http.get<Article>(`${this.addArticleUrl}/${id}`, { headers }); // GET request for article
   }
 
+  // Add a comment to an article
   addComment(articleId: number, content: string): Observable<any> {
     const token = localStorage.getItem('jwt');
     const headers = { Authorization: `Bearer ${token}` };
     return this.http.post<any>(
-      `${this.addArticleUrl}/${articleId}/comment`,
+      `${this.addArticleUrl}/${articleId}/comment`, // POST to article's comment endpoint
       content,
       { headers }
     );
   }
 
+  // Retrieve all comments for a given article
   getComments(articleId: number): Observable<any[]> {
     const token = localStorage.getItem('jwt');
     const headers = { Authorization: `Bearer ${token}` };
+    // GET request for article's comments
     return this.http.get<any[]>(`${this.addArticleUrl}/${articleId}/comment`, {
       headers,
     });

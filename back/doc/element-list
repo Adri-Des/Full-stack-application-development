@@ -1,0 +1,7 @@
+com.openclassrooms.mddapi
+com.openclassrooms.mddapi.controllers
+com.openclassrooms.mddapi.models
+com.openclassrooms.mddapi.repository
+com.openclassrooms.mddapi.security
+com.openclassrooms.mddapi.security.jwt
+com.openclassrooms.mddapi.services

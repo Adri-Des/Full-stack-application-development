@@ -1,6 +1,7 @@
 <mat-toolbar *ngIf="showHeader" class="toolbar-container">
   <img src="assets/logo_p6.png" class="logo" alt="MDD Logo" />
 
+  <!-- Spacer pushes content to the right -->
   <span class="spacer"></span>
 
   <button mat-icon-button (click)="toggleSidenav()" class="menu-button">
@@ -8,11 +9,14 @@
   </button>
 
   <div class="nav-links" *ngIf="!isMobile">
+    <!-- Link to the articles feed -->
     <a mat-button routerLink="/feed" routerLinkActive="active-link">Articles</a>
+    <!-- Link to the themes -->
     <a mat-button routerLink="/subjects" routerLinkActive="active-link"
       >Thèmes</a
     >
 
+    <!-- Icon button linking to the user profile -->
     <button
       mat-icon-button
       routerLink="/profile"
@@ -23,7 +27,7 @@
   </div>
 </mat-toolbar>
 
-<!-- Menu latéral pour mobile -->
+<!-- Mobile side navigation -->
 <mat-sidenav-container *ngIf="showHeader" class="sidenav-container">
   <mat-sidenav
     #sidenav
@@ -34,6 +38,7 @@
   >
     <div class="menu-content">
       <div class="menu-top">
+        <!-- Link to articles -->
         <a
           mat-list-item
           routerLink="/feed"
@@ -41,6 +46,7 @@
           (click)="closeSidenav()"
           >Articles</a
         >
+        <!-- Link to themes -->
         <a
           mat-list-item
           routerLink="/subjects"
@@ -50,6 +56,7 @@
         >
       </div>
       <div class="menu-bottom">
+        <!-- Link to profile -->
         <a
           mat-list-item
           routerLink="/profile"

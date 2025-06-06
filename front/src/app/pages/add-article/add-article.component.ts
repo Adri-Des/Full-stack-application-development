@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class AddArticleComponent implements OnInit {
   article = { title: '', content: '', subjectId: 0 };
+  // Array to store the list of available subjects
   subjects: Subject[] = [];
 
   constructor(
@@ -19,15 +20,18 @@ export class AddArticleComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // Retrieve the list of subjects from the SubjectService
     this.subjectService.getSubjects().subscribe(
-      (data) => (this.subjects = data),
+      (data) => (this.subjects = data), // Store the subjects
       () => alert('Erreur lors de la récupération des sujets')
     );
   }
 
+  // Method to create and submit a new article
   createArticle() {
     this.articleService.createArticle(this.article).subscribe(
       () => {
+        // On success, show confirmation and redirect to 'feed' page with refresh parameter to display the new article
         alert('Article publié avec succès'),
           this.router.navigate(['feed'], { queryParams: { refresh: 'true' } });
       },

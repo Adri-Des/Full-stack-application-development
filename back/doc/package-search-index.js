@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"com.openclassrooms.mddapi.controllers"},{"l":"com.openclassrooms.mddapi.models"},{"l":"com.openclassrooms.mddapi.repository"},{"l":"com.openclassrooms.mddapi.security"},{"l":"com.openclassrooms.mddapi.security.jwt"},{"l":"com.openclassrooms.mddapi.services"}]

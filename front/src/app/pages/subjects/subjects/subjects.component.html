@@ -1,35 +1,5 @@
-<!--<div *ngIf="subjects.length > 0">
-  <h2>Thèmes disponibles</h2>
-  <ul>
-    <li *ngFor="let subject of subjects">
-      {{ subject.name }}
-      <button (click)="subscribe(subject.id)">S'abonner</button>
-      <button (click)="unsubscribe(subject.id)">Se désabonner</button>
-    </li>
-  </ul>
-  <a routerLink="/add-article">Créer un article</a>
-</div>
-<div *ngIf="subjects.length === 0">
-  <p>Aucun thème disponible.</p>
-</div>-->
-
-<!--<mat-toolbar class="toolbar-container">
-  <img src="assets/logo_p6.png" class="logo" alt="MDD Logo" />
-
-  <span class="spacer"></span>
-  <div class="nav-links">
-    <a mat-button routerLink="/feed" routerLinkActive="active-link">Articles</a>
-    <a mat-button routerLink="/subjects" routerLinkActive="active-link"
-      >Thèmes</a
-    >
-
-    <button mat-icon-button>
-      <mat-icon>account_circle</mat-icon>
-    </button>
-  </div>
-</mat-toolbar>-->
-
 <div class="content grid">
+  <!-- Create a card for each subject-->
   <mat-card *ngFor="let subject of subjects">
     <mat-card-title>{{ subject.name }}</mat-card-title>
 
@@ -38,6 +8,7 @@
     </mat-card-content>-->
 
     <div class="subscribe-container">
+      <!-- If the user is subscribed to the subject, show the "check" symbol -->
       <div
         class="subscribed-text"
         *ngIf="isSubscribed(subject.id); else subscribeButton"
@@ -45,6 +16,7 @@
         <span>✅ Abonné</span>
       </div>
 
+      <!-- If not subscribed, show the 'Subscribe' button -->
       <ng-template #subscribeButton>
         <button
           mat-raised-button

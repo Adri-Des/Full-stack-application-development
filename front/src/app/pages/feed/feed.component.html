@@ -1,39 +1,10 @@
-<!--<div *ngIf="articles.length > 0">
-  <h1>Fil d’actualité</h1>
-  <div *ngFor="let article of articles">
-    <h2>{{ article.title }}</h2>
-    <p>Par {{ article.author.username }} - {{ article.subject.name }}</p>
-    <p>{{ article.content }}</p>
-    <small>Publié le {{ article.createdAt | date }}</small>
-    <a [routerLink]="'/article/' + article.id">Lire la suite</a>
-    <hr />
-  </div>
-</div>
-<div *ngIf="articles.length === 0">
-  <p>Aucun article disponible.</p>
-</div>-->
-
-<!--<mat-toolbar class="toolbar-container">
-  <img src="assets/logo_p6.png" class="logo" alt="MDD Logo" />
-
-  <span class="spacer"></span>
-  <div class="nav-links">
-    <a mat-button routerLink="/feed" routerLinkActive="active-link">Articles</a>
-    <a mat-button routerLink="/subjects" routerLinkActive="active-link"
-      >Thèmes</a
-    >
-
-    <button mat-icon-button>
-      <mat-icon>account_circle</mat-icon>
-    </button>
-  </div>
-</mat-toolbar>-->
-
 <div class="feed-header">
+  <!-- Button to navigate to the article creation page -->
   <button mat-raised-button color="primary" routerLink="/add-article">
     Créer un article
   </button>
   <div class="sort-container">
+    <!-- Button that triggers the sort options menu -->
     <button mat-button [matMenuTriggerFor]="sortMenu">
       Trier par
       <mat-icon>{{
@@ -44,15 +15,18 @@
 </div>
 
 <mat-menu #sortMenu="matMenu">
+  <!-- Option to sort by most recent (descending) -->
   <button mat-menu-item (click)="changeSortOrder('desc')">
     Plus récent <mat-icon>arrow_downward</mat-icon>
   </button>
+  <!-- Option to sort by oldest first (ascending) -->
   <button mat-menu-item (click)="changeSortOrder('asc')">
     Plus ancien <mat-icon>arrow_upward</mat-icon>
   </button>
 </mat-menu>
 
 <div class="content grid">
+  <!-- Loop through articles and display each in a card -->
   <mat-card
     *ngFor="let article of articles"
     (click)="ArticleDetail(article.id)"
